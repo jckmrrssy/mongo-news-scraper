@@ -2,13 +2,12 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const axios = require("axios");
-const cheerio = require("cheerio");
+
 
 // Bring in all models
 const db = require("./models");
 
-// Determine port to use based on deployed or local
+// Determine port to use based on deployment status
 const PORT = process.env.PORT || 3000
 
 // Initialize Express
@@ -29,8 +28,11 @@ app.use(express.json());
 // Making public a static folder
 app.use(express.static("public"));
 
-// Bring in routes here , may need to move dependencies around and such
 
+// Bring in routes here
+let routes = require("./routes/routes.js");
+
+app.use(routes)
 
 
 // Start the server
