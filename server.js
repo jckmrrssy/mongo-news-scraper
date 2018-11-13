@@ -31,7 +31,7 @@ let routes = require("./routes/routes.js");
 app.use(routes)
 
 
-// Start the server
+// Start the server listening
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
