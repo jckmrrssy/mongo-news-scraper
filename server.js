@@ -3,10 +3,6 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-
-// Bring in all models
-const db = require("./models");
-
 // Determine port to use based on deployment status
 const PORT = process.env.PORT || 3000
 
