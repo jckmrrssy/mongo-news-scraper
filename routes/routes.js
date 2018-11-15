@@ -21,16 +21,16 @@ router.get("/scrape", function (req, res) {
         // Load eth news html into cheerio
         let $ = cheerio.load(response.data);
         // Grab all article thumbnails 
-        $("div.article-thumbnail__info").each(function(i, element) {
+        $(".article-thumbnail__info").each(function(i, element) {
             // Creat result object & use scrape results to declare properties
             let result = {};
 
             result.headline = $(this)
-            .children(".article-thumbnail__info__title").text();
+            .children("h2").text();
             result.summary = $(this)
-            .children(".article-thumbnail__info__summary").text();
+            .find(".article-thumbnail__info__summary").text();
             result.link = $(this)
-            .children("a").attr("href"); 
+            .children("h2").attr("href"); 
             
             // Create new Article (for each) to store using result object from above
             db.Article.create(result)

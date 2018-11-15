@@ -5,16 +5,11 @@ let Schema = mongoose.Schema;
 // Creating the Article Schema object
 let ArticleSchema = new Schema({
 
-    headline: {
-        type: String,
-        required: true
-    },
+    headline: String,
+    
     summary: String,
     
-    link: {
-        type: String,
-        required: true
-    },
+    link: String,
     // thumbnail? just get it working for now then improve 
     comment: {
         type: Schema.Types.ObjectId,
