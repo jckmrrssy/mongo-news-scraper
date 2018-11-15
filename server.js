@@ -19,7 +19,7 @@ mongoose.connect(MONGODB_URI);
 // Morgan logger setup
 app.use(logger("dev"));
 // Parse request body as JSON
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Making public a static folder
 app.use(express.static("public"));
@@ -32,8 +32,8 @@ app.use(routes)
 
 
 // Start the server listening
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
-  });
+});
 
 
