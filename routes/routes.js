@@ -17,18 +17,18 @@ router.get("/", function (req, res) {
 // Scrape route - will scrape ETHNews trending articles
 router.get("/scrape", function (req, res) {
     // request eth news html via axios
-    axios.get("https://www.ethnews.com/").then((response) => {
+    axios.get("http://www.ethnews.com").then((response) => {
         // Load eth news html into cheerio
         let $ = cheerio.load(response.data);
         // Grab all article thumbnails 
         $("div.article-thumbnail__info").each(function(i, element) {
-            // Creat result object & use scrape results to insert declare properties
+            // Creat result object & use scrape results to declare properties
             let result = {};
 
             result.headline = $(this)
-            .children("a").text();
+            .children(".article-thumbnail__info__title").text();
             result.summary = $(this)
-            .children("div.article-thumbnail__info__summary").text();
+            .children(".article-thumbnail__info__summary").text();
             result.link = $(this)
             .children("a").attr("href"); 
             
@@ -38,18 +38,28 @@ router.get("/scrape", function (req, res) {
                 console.log(createdArticles);
             })
             .catch(function(err) {
-                console.log(err);d
+                console.log(err);
             });
         });
-        res.send("Complete")
+        res.redirect("/");
+    })
+    .catch((err) => {
+        res.json(err);
+        console.log(err);
     });
 });
 // Will get all stocks (news snippets/articles) from the database
-router.get("/stocks", (req,res) => {
-
+router.get("/articles", (req,res) => {
+    db.Article.find({})
+    .then(function(data) {
+        res.json(data);
+    })
+    .catch((err) => {
+        res.json(err);
+    });
 });
 // Route for grabbing specific stock by id to & doing stuff with associated comments
-router.route("/stocks/:id")    
+router.route("/articles/:id")    
         .get( (req,res) => {})
         .post( (req,res) => {})
         // delete?

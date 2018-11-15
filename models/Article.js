@@ -9,10 +9,8 @@ let ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    summary: {
-        type: String,
-        required: true
-    },
+    summary: String,
+    
     link: {
         type: String,
         required: true
